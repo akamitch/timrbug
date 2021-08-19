@@ -4,8 +4,8 @@ function getBalanceByDate($date, $url){
     $format = 'd.m.Y'; //30.08.2021
 
     $savedStrategy = file_get_contents($url);
-    //$filename = "./logs/".date("Y.m.d_h.i.s");
-    //file_put_contents($filename.".json", $savedStrategy);
+    $filename = "./logs/".date("Y.m.d_h.i.s");
+    file_put_contents($filename.".json", $savedStrategy);
     $savedStrategyArray = json_decode($savedStrategy, true); //теперь это массив
 
     foreach ($savedStrategyArray['periods'] as $period){
@@ -23,11 +23,11 @@ function getBalanceByDate($date, $url){
 
             if ($date >= $weekStartDate and $date <= $weekEndDate) {
                 //Если искомая дата в текущей неделе, значит мы нашли нужную неделю
-                return($currBalance);
+                return $currBalance;
             }
         }
     }
-    return false;
+    return "Week not found!";
 }
 
 $url = 'https://calc.superkopilka.com/export.php?id=310521-1093';
@@ -35,4 +35,4 @@ $url = 'https://calc.superkopilka.com/export.php?id=310521-1093';
 $format2 = 'Y-m-d'; //2021-08-04
 $date = DateTime::createFromFormat($format2, "2021-08-30");
 
-echo getBalanceByDate($date, $url);
+echo getBalanceByDate($date, $url)."\n";
