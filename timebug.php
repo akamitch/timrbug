@@ -36,6 +36,3 @@ $format2 = 'Y-m-d'; //2021-08-04
 $date = DateTime::createFromFormat($format2, "2021-08-30");
 
 echo getBalanceByDate($date, $url);
-
-
-//echo getPrevousUnusedGrant($endkey, $email, $date, $allRecordsArray);
